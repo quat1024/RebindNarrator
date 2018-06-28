@@ -1,4 +1,4 @@
-package quaternary.rebindnarratorcore;
+package quaternary.rebindnarrator.asm;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.*;

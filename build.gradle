@@ -27,11 +27,11 @@ minecraft {
     mappings = "snapshot_20180407"
 }
 
-minecraft.coreMod = "quaternary.rebindnarratorcore.LoadingPlugin"
+minecraft.coreMod = "quaternary.rebindnarrator.asm.LoadingPlugin"
 
 jar {
     manifest {
-        attributes "FMLCorePlugin": "quaternary.rebindnarratorcore.LoadingPlugin"
+        attributes "FMLCorePlugin": "quaternary.rebindnarrator.asm.LoadingPlugin"
     }
 }
 

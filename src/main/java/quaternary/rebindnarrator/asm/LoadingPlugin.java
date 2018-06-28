@@ -1,4 +1,4 @@
-package quaternary.rebindnarratorcore;
+package quaternary.rebindnarrator.asm;
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
@@ -7,17 +7,17 @@ import java.util.Map;
 
 @IFMLLoadingPlugin.MCVersion("1.12.2")
 @IFMLLoadingPlugin.Name("Narrator Hotkey Disabler")
-@IFMLLoadingPlugin.TransformerExclusions("quaternary")
+@IFMLLoadingPlugin.TransformerExclusions("quaternary.rebindnarrator.asm")
 @IFMLLoadingPlugin.SortingIndex(1337)
 public class LoadingPlugin implements IFMLLoadingPlugin {
 	@Override
 	public String[] getASMTransformerClass() {
-		return new String[]{"quaternary.rebindnarratorcore.ClassTransformer"};
+		return new String[]{"quaternary.rebindnarrator.asm.ClassTransformer"};
 	}
 	
 	@Override
 	public String getModContainerClass() {
-		return "quaternary.rebindnarratorcore.ModContainer";
+		return null;
 	}
 	
 	@Nullable

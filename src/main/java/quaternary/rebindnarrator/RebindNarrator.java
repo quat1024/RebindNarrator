@@ -15,13 +15,18 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.lwjgl.input.Keyboard;
 
 @Mod(modid = RebindNarrator.MODID, name = RebindNarrator.NAME, version = RebindNarrator.VERSION, clientSideOnly = true)
-@Mod.EventBusSubscriber
 public class RebindNarrator {
 	public static final String MODID = "rebind_narrator";
 	public static final String NAME = "Rebind Narrator";
 	public static final String VERSION = "1.0.0";
 	
 	private static KeyBinding bind;
+	
+	static {
+		for(int i=0; i < 100; i++) {
+			System.out.println("MOD CLASS LOADED!");
+		}
+	}
 	
 	@Mod.EventHandler
 	public static void init(FMLInitializationEvent e) {
@@ -38,17 +43,25 @@ public class RebindNarrator {
 		}, KeyModifier.CONTROL, Keyboard.KEY_B, "key.categories.misc");
 		
 		ClientRegistry.registerKeyBinding(bind);
+		
+		for(int i=0; i < 100; i++) {
+			System.out.println("DEBUG!");
+		}
 	}
 	
-	@SubscribeEvent
-	public static void input(InputEvent e) {
-		if(Keyboard.getEventKeyState() && bind.isActiveAndMatches(Keyboard.getEventKey())) {
-			Minecraft mc = Minecraft.getMinecraft();
-			mc.gameSettings.setOptionValue(GameSettings.Options.NARRATOR, 1);
-			
-			if (mc.currentScreen instanceof ScreenChatOptions) {
-				((ScreenChatOptions)mc.currentScreen).updateNarratorButton();
+	@Mod.EventBusSubscriber
+	public static class Events {
+		@SubscribeEvent
+		public static void input(InputEvent e) {
+			if(Keyboard.getEventKeyState() && bind.isActiveAndMatches(Keyboard.getEventKey())) {
+				Minecraft mc = Minecraft.getMinecraft();
+				mc.gameSettings.setOptionValue(GameSettings.Options.NARRATOR, 1);
+				
+				if (mc.currentScreen instanceof ScreenChatOptions) {
+					((ScreenChatOptions)mc.currentScreen).updateNarratorButton();
+				}
 			}
 		}
 	}
+	
 }
