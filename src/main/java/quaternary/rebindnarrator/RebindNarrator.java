@@ -25,7 +25,7 @@ public class RebindNarrator {
 	
 	@Mod.EventHandler
 	public static void init(FMLInitializationEvent e) {
-		bind = new KeyBinding("rebindnarrator.keybind", new IKeyConflictContext() {
+		bind = new KeyBinding("options.narrator", new IKeyConflictContext() {
 			@Override
 			public boolean isActive() {
 				return !(Minecraft.getMinecraft().currentScreen instanceof GuiControls);
