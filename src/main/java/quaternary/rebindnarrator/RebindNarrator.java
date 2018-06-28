@@ -22,12 +22,6 @@ public class RebindNarrator {
 	
 	private static KeyBinding bind;
 	
-	static {
-		for(int i=0; i < 100; i++) {
-			System.out.println("MOD CLASS LOADED!");
-		}
-	}
-	
 	@Mod.EventHandler
 	public static void init(FMLInitializationEvent e) {
 		bind = new KeyBinding("options.narrator", new IKeyConflictContext() {
@@ -43,10 +37,6 @@ public class RebindNarrator {
 		}, KeyModifier.CONTROL, Keyboard.KEY_B, "key.categories.misc");
 		
 		ClientRegistry.registerKeyBinding(bind);
-		
-		for(int i=0; i < 100; i++) {
-			System.out.println("DEBUG!");
-		}
 	}
 	
 	@Mod.EventBusSubscriber
