@@ -1,60 +1,23 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = 'http://files.minecraftforge.net/maven' }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
+
 apply plugin: 'net.minecraftforge.gradle.forge'
-//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
-
-version = "1.0"
-group = "quaternary.rebindnarrator" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "rebindnarrator"
-
-sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-compileJava {
-    sourceCompatibility = targetCompatibility = '1.8'
-}
+version = '1.0'
+group = 'quaternary.rebindnarrator'
+archivesBaseName = 'rebindnarrator'
+sourceCompatibility = '1.8'
 
 minecraft {
-    version = "1.12.2-14.23.4.2705"
-    runDir = "run"
-    
-    mappings = "snapshot_20180407"
-}
-
-minecraft.coreMod = "quaternary.rebindnarrator.asm.LoadingPlugin"
-
-jar {
-    manifest {
-        attributes "FMLCorePlugin": "quaternary.rebindnarrator.asm.LoadingPlugin"
-        attributes "FMLCorePluginContainsFMLMod": true
-    }
-}
-
-dependencies {
-    //Ayy lmao
-}
-
-processResources {
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
-    // copy everything else except the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+    version = '1.12.2-14.23.4.2705'
+    mappings = 'snapshot_20180407'
+    coreMod = 'quaternary.rebindnarrator.asm.LoadingPlugin'
+    runDir = 'run'
 }

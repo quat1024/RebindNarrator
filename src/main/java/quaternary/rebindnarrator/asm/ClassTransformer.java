@@ -1,47 +1,56 @@
 package quaternary.rebindnarrator.asm;
 
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.objectweb.asm.*;
-import org.objectweb.asm.tree.*;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.IntInsnNode;
+import org.objectweb.asm.tree.MethodNode;
 
 import java.util.ListIterator;
 
-public class ClassTransformer implements IClassTransformer, Opcodes {
+public final class ClassTransformer implements IClassTransformer, Opcodes {
+	// org.lwjgl.input.Keyboard.KEY_B
+	private static final int KEY_B = 0x30;
+
+	// Unused in org.lwjgl.input.Keyboard
+	private static final int KEY_INVALID = 0x54;
+
 	@Override
-	public byte[] transform(String name, String transformedName, byte[] basicClass) {
-		if(transformedName.equals("net.minecraft.client.Minecraft")) {
-			ClassReader reader = new ClassReader(basicClass);
-			ClassNode mc = new ClassNode();
-			reader.accept(mc, 0);
-			
-			for(MethodNode method : mc.methods) {
-				if(method.name.equals("dispatchKeypresses") || method.name.equals("func_152348_aa")) {
-					InsnList instructions = method.instructions;
-					
-					ListIterator<AbstractInsnNode> inserator = instructions.iterator();
-					
-					//Search for the "BIPUSH 48", this marks the start of the
-					//block responsible for toggling the narrator
-					//0x30 is the LWJGL key code for "B". Check in Keyboard.java
-					while(inserator.hasNext()) {
-						AbstractInsnNode instruction = inserator.next();
-						if(instruction.getOpcode() == BIPUSH && ((IntInsnNode)instruction).operand == 0x30) {
-							//Rewrite it to a number that's not assigned to anything in Keyboard.java
-							//Least invasive fix? :thonk:
-							((IntInsnNode) instruction).operand = 0x54;
+	public byte[] transform(String name, String transformedName, byte[] classBytes) {
+		if ("net.minecraft.client.Minecraft".equals(transformedName)) {
+			final ClassReader classReader = new ClassReader(classBytes);
+			final ClassNode classNode = new ClassNode();
+
+			classReader.accept(classNode, 0);
+
+			for (final MethodNode methodNode : classNode.methods) {
+				if ("func_152348_aa".equals(methodNode.name) || "dispatchKeypresses".equals(methodNode.name)) {
+					final ListIterator<AbstractInsnNode> nodeIterator = methodNode.instructions.iterator();
+
+					// Search for "BIPUSH 48" in the method instructions
+					// This marks the block responsible for toggling the narrator
+
+					while (nodeIterator.hasNext()) {
+						final AbstractInsnNode node = nodeIterator.next();
+
+						if (node.getOpcode() == BIPUSH && ((IntInsnNode) node).operand == KEY_B) {
+							((IntInsnNode) node).operand = KEY_INVALID;
 							break;
 						}
 					}
-					
 					break;
 				}
 			}
-			
-			ClassWriter writer = new ClassWriter(0); //No need for flags since I don't change the size or frames of this class
-			mc.accept(writer);
-			return writer.toByteArray();
+
+			// No need for flags since size or frames of class are unchanged
+			ClassWriter classWriter = new ClassWriter(0);
+			classNode.accept(classWriter);
+			return classWriter.toByteArray();
 		}
-		
-		return basicClass;
+
+		return classBytes;
 	}
 }
