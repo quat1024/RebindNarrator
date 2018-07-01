@@ -1,4 +1,4 @@
-package quaternary.rebindnarrator.asm;
+package quaternary.rebindnarrator;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.objectweb.asm.ClassReader;
@@ -20,21 +20,21 @@ public final class ClassTransformer implements IClassTransformer, Opcodes {
 
 	@Override
 	public byte[] transform(String name, String transformedName, byte[] classBytes) {
-		if ("net.minecraft.client.Minecraft".equals(transformedName)) {
+		if (transformedName.equals("net.minecraft.client.Minecraft")) {
 			final ClassReader classReader = new ClassReader(classBytes);
 			final ClassNode classNode = new ClassNode();
 
 			classReader.accept(classNode, 0);
 
-			for (final MethodNode methodNode : classNode.methods) {
-				if ("func_152348_aa".equals(methodNode.name) || "dispatchKeypresses".equals(methodNode.name)) {
-					final ListIterator<AbstractInsnNode> nodeIterator = methodNode.instructions.iterator();
+			for (MethodNode methodNode : classNode.methods) {
+				if (methodNode.name.equals("func_152348_aa") || methodNode.name.equals("dispatchKeypresses")) {
+					ListIterator<AbstractInsnNode> nodeIterator = methodNode.instructions.iterator();
 
 					// Search for "BIPUSH 48" in the method instructions
 					// This marks the block responsible for toggling the narrator
 
 					while (nodeIterator.hasNext()) {
-						final AbstractInsnNode node = nodeIterator.next();
+						AbstractInsnNode node = nodeIterator.next();
 
 						if (node.getOpcode() == BIPUSH && ((IntInsnNode) node).operand == KEY_B) {
 							((IntInsnNode) node).operand = KEY_INVALID;
