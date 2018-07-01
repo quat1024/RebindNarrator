@@ -16,6 +16,7 @@ public final class RebindNarratorModContainer extends DummyModContainer {
 	private static final ModMetadata METADATA = new ModMetadata();
 
 	static {
+		//A lot of this is duplicate information...
 		METADATA.modId = RebindNarratorModContainer.MODID;
 		METADATA.name = RebindNarratorModContainer.NAME;
 		METADATA.version = RebindNarratorModContainer.VERSION;

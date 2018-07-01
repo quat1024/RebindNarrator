@@ -1,0 +1,11 @@
+[
+	{
+		"modid": "rebind_narrator",
+		"name": "Rebind Narrator",
+		"description": "Rebind the narrator key!",
+		"version": "${version}",
+		"mcversion": "${mcversion}",
+		"authorList": ["quaternary", "InsomniaKitten"],
+		"credits": "Mojang, for forgetting to add this keybind :OMEGALUL:"
+	}
+]
