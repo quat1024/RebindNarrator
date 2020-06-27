@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "rebind-narrator",
+  "version": "${version}",
+
+  "name": "Rebind Narrator",
+  "description": "Adds a keybind to options for the narrator.",
+  "authors": [
+    "quaternary"
+  ],
+  "contact": {
+    "homepage": "https://highlysuspect.agency/",
+    "sources": "https://github.com/quaternary/rebind-narrator"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/rebind-narrator/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "agency.highlysuspect.rebindnarrator.Init"
+    ]
+  },
+  "mixins": [
+    "rebind-narrator.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
