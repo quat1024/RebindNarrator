@@ -19,7 +19,10 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modCompile "io.github.prospector:modmenu:1.12.1+build.15"
+    //This seems to break runtime with some bullshit about fabric-biomes mixins failing
+    //Which is weird, i thought fabric biomes got crobbed anyways, dunno why this brings it in
+    //Oh well
+    //modCompile "io.github.prospector:modmenu:1.14.6+build.31"
 }
 
 processResources {
