@@ -9,6 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class ForgeImpl extends RebindNarrator {
+	@SuppressWarnings("NoTranslation") //mcdev reporting that "key.keyboard.b" has no translation. thanks i guess
 	public final KeyMapping NARRATOR_KEY = new KeyMapping(
 		"options.narrator",
 		KeyConflictContext.UNIVERSAL,
