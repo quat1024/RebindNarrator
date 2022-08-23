@@ -1,12 +1,14 @@
 package agency.highlysuspect.rebindnarrator;
 
 import net.minecraft.client.gui.screens.Screen;
+import org.lwjgl.glfw.GLFW;
 
-public abstract class RebindNarrator {
+public class RebindNarrator {
 	/**
 	 * Global variable. The current implementation of RebindNarrator.
+	 * The implementation defined in this class is a simple reimplementation of the vanilla logic.
 	 */
-	public static RebindNarrator IMPL;
+	public static RebindNarrator IMPL = new RebindNarrator();
 	
 	/**
 	 * GLFW sometimes calls these "key tokens", https://www.glfw.org/docs/3.3/input_guide.html#input_key .
@@ -16,7 +18,7 @@ public abstract class RebindNarrator {
 	 * @return whether that key should toggle the narrator
 	 */
 	public boolean isCorrectKey(int glfwKeyToken) {
-		return glfwKeyToken == 66;
+		return glfwKeyToken == GLFW.GLFW_KEY_B;
 	}
 	
 	/**

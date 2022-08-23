@@ -15,5 +15,6 @@ pluginManagement {
 rootProject.name = "rebind-narrator"
 include(
 	"Fabric",
+	"Forge",
 	"Xplat"
 )
