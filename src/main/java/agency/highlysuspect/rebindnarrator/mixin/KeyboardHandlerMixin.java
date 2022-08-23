@@ -1,6 +1,6 @@
 package agency.highlysuspect.rebindnarrator.mixin;
 
-import agency.highlysuspect.rebindnarrator.Init;
+import agency.highlysuspect.rebindnarrator.RebindNarrator;
 import net.minecraft.client.KeyboardHandler;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,6 +14,6 @@ public class KeyboardHandlerMixin {
 	//Returning a value that equals "key" will cause the == check to pass and the narrator code will be invoked.
 	@ModifyConstant(method = "keyPress(JIIII)V", constant = @Constant(intValue = GLFW.GLFW_KEY_B))
 	private int narrator(int keyB, long windowHandle, int key, int scancode, int action, int mods) {
-		return Init.getNarratorKeyToken();
+		return RebindNarrator.IMPL.getNarratorKeyToken();
 	}
 }

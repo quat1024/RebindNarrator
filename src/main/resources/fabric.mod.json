@@ -1,38 +1,34 @@
 {
-  "schemaVersion": 1,
-  "id": "rebind-narrator",
-  "version": "${version}",
-
-  "name": "Rebind Narrator",
-  "description": "Adds a keybind to options for the narrator.",
-  "authors": [
-    "quaternary"
-  ],
-  "contact": {
-    "homepage": "https://highlysuspect.agency/",
-    "sources": "https://github.com/quaternary/rebind-narrator"
-  },
-
-  "license": "LGPL-3.0-or-later",
-  "icon": "assets/rebind-narrator/icon.png",
-
-  "environment": "client",
-  "entrypoints": {
-    "client": [
-      "agency.highlysuspect.rebindnarrator.Init"
-    ]
-  },
-  "mixins": [
-    "rebind-narrator.mixins.json"
-  ],
-
-  "depends": {
-    "fabricloader": ">=0.7.4",
-    "fabric-key-binding-api-v1": "*",
+	"schemaVersion": 1,
+	"id": "rebind-narrator",
+	"version": "${version}",
+	"name": "Rebind Narrator",
+	"description": "Adds a keybind to options for the narrator.",
+	"authors": [
+		"quaternary"
+	],
+	"contact": {
+		"homepage": "https://highlysuspect.agency/",
+		"sources": "https://github.com/quaternary/rebind-narrator"
+	},
+	"license": "LGPL-3.0-or-later",
+	"icon": "assets/rebind-narrator/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"agency.highlysuspect.rebindnarrator.Init"
+		]
+	},
+	"mixins": [
+		"rebind-narrator.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.7.4",
+		"fabric-key-binding-api-v1": "*",
 		"fabric-resource-loader-v0": "*",
-    "minecraft": ">=1.18"
-  },
-  "suggests": {
-    "that-you-switch-to-quilt": "*"
-  }
+		"minecraft": ">=1.18"
+	},
+	"suggests": {
+		"that-you-switch-to-quilt": "*"
+	}
 }
