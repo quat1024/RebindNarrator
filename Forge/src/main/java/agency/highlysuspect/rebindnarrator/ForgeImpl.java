@@ -2,15 +2,11 @@ package agency.highlysuspect.rebindnarrator;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.controls.KeyBindsScreen;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import java.util.Objects;
 
 public class ForgeImpl extends RebindNarrator {
 	public final KeyMapping NARRATOR_KEY = new KeyMapping(
@@ -30,12 +26,6 @@ public class ForgeImpl extends RebindNarrator {
 	
 	@Override
 	public boolean isCorrectKey(int glfwKeyToken) {
-		//Forge seems to eagerly set the key binding when you are busy adding modifiers, so rebinding the key makes the narrator spam every frame
-		if(Minecraft.getInstance().screen instanceof KeyBindsScreen kScreen) {
-			KeyMapping selectedKey = kScreen.selectedKey;
-			if(selectedKey != null && Objects.equals(selectedKey.getName(), NARRATOR_KEY.getName())) return false;
-		}
-		
 		return glfwKeyToken == NARRATOR_KEY.getKey().getValue(); //getKey is a Forge extension
 	}
 	
