@@ -14,14 +14,16 @@ dependencies {
 	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
 	
-	//fabric api modules
+	//fabric api
 	modImplementation fabricApi.module("fabric-key-binding-api-v1", project.fabric_api_version)
-	modLocalRuntime fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
 	
-	//integration: AMECS (see: https://github.com/Siphalor/nmuk/issues/9 for reasoning behind the excludes)
-	modCompileOnly("de.siphalor:amecsapi-1.18:1.3.6+mc22w06a") { exclude group: "com.github.astei" }
-	modLocalRuntime("de.siphalor:amecs-1.18:1.3.8+mc.1.18.2") { exclude group: "com.github.astei"	}
-	//modLocalRuntime("de.siphalor:nmuk-1.18:1.0.1+mc1.18-pre1") { exclude group: "com.github.astei"	}
+	//integration: AMECS API (see: https://github.com/Siphalor/nmuk/issues/9 for reasoning behind the excludes)
+	modCompileOnly("de.siphalor:${project.amecsapi_artifactid}:${project.amecsapi_version}") { exclude group: "com.github.astei" }
+	
+	//trick out the local workspace a bit
+	modLocalRuntime fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
+	modLocalRuntime("de.siphalor:${project.amecs_artifactid}:${project.amecs_version}") { exclude group: "com.github.astei"	}
+	//modLocalRuntime("de.siphalor:${project.nmuk_artifactid}:${project.nmuk_version}") { exclude group: "com.github.astei"	} //for testing nmuk w/o amecs
 }
 
 processResources {
