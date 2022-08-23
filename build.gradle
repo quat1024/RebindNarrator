@@ -2,13 +2,26 @@ plugins {
 	id 'fabric-loom' version '0.12-SNAPSHOT'
 }
 
+repositories {
+	maven {
+		url = "https://maven.siphalor.de"
+		content { includeGroup "de.siphalor" }
+	}
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
 	
+	//fabric api modules
 	modImplementation fabricApi.module("fabric-key-binding-api-v1", project.fabric_api_version)
-	modImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
+	modLocalRuntime fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
+	
+	//integration: AMECS (see: https://github.com/Siphalor/nmuk/issues/9 for reasoning behind the excludes)
+	modCompileOnly("de.siphalor:amecsapi-1.18:1.3.6+mc22w06a") { exclude group: "com.github.astei" }
+	modLocalRuntime("de.siphalor:amecs-1.18:1.3.8+mc.1.18.2") { exclude group: "com.github.astei"	}
+	//modLocalRuntime("de.siphalor:nmuk-1.18:1.0.1+mc1.18-pre1") { exclude group: "com.github.astei"	}
 }
 
 processResources {
