@@ -1,16 +1,14 @@
 package agency.highlysuspect.rebindnarrator.compat;
 
+import agency.highlysuspect.rebindnarrator.NmukShim;
 import agency.highlysuspect.rebindnarrator.RebindNarrator;
 import com.mojang.blaze3d.platform.InputConstants;
 import de.siphalor.amecs.api.AmecsKeyBinding;
 import de.siphalor.amecs.api.KeyModifiers;
 import de.siphalor.amecs.impl.duck.IKeyBinding;
-import de.siphalor.nmuk.api.NMUKAlternatives;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import org.lwjgl.glfw.GLFW;
-
-import java.util.List;
 
 /**
  * AMECS adds the ability to assign Ctrl, Shift, and Alt modifiers to a keybinding. With this mod installed,
@@ -27,15 +25,7 @@ public class FabricAmecsImpl extends RebindNarrator {
 	
 	@Override
 	public boolean isCorrectKey(int glfwKeyToken) {
-		if(glfwKeyToken == KeyBindingHelper.getBoundKeyOf(NARRATOR_KEY).getValue() && ((IKeyBinding) NARRATOR_KEY).amecs$getKeyModifiers().isPressed()) {
-			return true;
-		}
-		
-		//Amecs extends NMUK, so I need to check NMUK alternatives as well.
-		List<KeyMapping> alternatives = NMUKAlternatives.getAlternatives(NARRATOR_KEY);
-		if(alternatives == null) return false;
-		
-		for(KeyMapping alt : alternatives) {
+		for(KeyMapping alt : NmukShim.INST.getSelfAndAlternatives(NARRATOR_KEY)) {
 			if(glfwKeyToken == KeyBindingHelper.getBoundKeyOf(alt).getValue() && ((IKeyBinding) alt).amecs$getKeyModifiers().isPressed()) {
 				return true;
 			}

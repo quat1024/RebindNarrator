@@ -15,6 +15,10 @@ public class FabricImpl extends RebindNarrator {
 	
 	@Override
 	public boolean isCorrectKey(int glfwKeyToken) {
-		return glfwKeyToken == KeyBindingHelper.getBoundKeyOf(NARRATOR_KEY).getValue();
+		for(KeyMapping alt : NmukShim.INST.getSelfAndAlternatives(NARRATOR_KEY)) {
+			if(glfwKeyToken == KeyBindingHelper.getBoundKeyOf(alt).getValue()) return true;
+		}
+		
+		return false;
 	}
 }
