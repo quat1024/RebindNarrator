@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "rebind-narrator",
+	"id": "rebind_narrator",
 	"version": "${version}",
 	"name": "Rebind Narrator",
 	"description": "Adds a keybind to options for the narrator.",
@@ -9,10 +9,10 @@
 	],
 	"contact": {
 		"homepage": "https://highlysuspect.agency/",
-		"sources": "https://github.com/quaternary/rebind-narrator"
+		"sources": "https://github.com/quat1024/RebindNarrator/"
 	},
 	"license": "LGPL-3.0-or-later",
-	"icon": "assets/rebind-narrator/icon.png",
+	"icon": "assets/rebind_narrator/icon.png",
 	"environment": "client",
 	"entrypoints": {
 		"client": [
@@ -20,7 +20,7 @@
 		]
 	},
 	"mixins": [
-		"rebind-narrator.mixins.json"
+		"rebind_narrator.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.7.4",

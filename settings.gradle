@@ -12,7 +12,7 @@ pluginManagement {
 	}
 }
 
-rootProject.name = "rebind-narrator"
+rootProject.name = "rebind_narrator"
 include(
 	"Fabric",
 	"Forge",
