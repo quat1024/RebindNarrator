@@ -15,7 +15,9 @@ public abstract class RebindNarrator {
 	 * @param glfwKeyToken the token of the currently pressed key
 	 * @return whether that key should toggle the narrator
 	 */
-	public abstract boolean isCorrectKey(int glfwKeyToken);
+	public boolean isCorrectKey(int glfwKeyToken) {
+		return glfwKeyToken == 66;
+	}
 	
 	/**
 	 * @return whether the correct modifier keys are being pressed.

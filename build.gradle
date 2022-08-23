@@ -1,41 +1,38 @@
-plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
-}
-
-repositories {
-	maven {
-		url = "https://maven.siphalor.de"
-		content { includeGroup "de.siphalor" }
+subprojects {
+	apply plugin: "java"
+	java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+	java.withSourcesJar()
+	
+	tasks.withType(JavaCompile).configureEach {
+		it.options.encoding = "UTF-8"
+		it.options.release = 17
 	}
-}
-
-dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings loom.officialMojangMappings()
-	modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
 	
-	//fabric api
-	modImplementation fabricApi.module("fabric-key-binding-api-v1", project.fabric_api_version)
-	
-	//integration: AMECS API (see: https://github.com/Siphalor/nmuk/issues/9 for reasoning behind the excludes)
-	modCompileOnly("de.siphalor:${project.amecsapi_artifactid}:${project.amecsapi_version}") { exclude group: "com.github.astei" }
-	
-	//trick out the local workspace a bit
-	modLocalRuntime fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
-	modLocalRuntime("de.siphalor:${project.amecs_artifactid}:${project.amecs_version}") { exclude group: "com.github.astei"	}
-	//modLocalRuntime("de.siphalor:${project.nmuk_artifactid}:${project.nmuk_version}") { exclude group: "com.github.astei"	} //for testing nmuk w/o amecs
-}
-
-processResources {
-	inputs.property "version", project.version
-	
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
+	tasks.withType(GenerateModuleMetadata) {
+		//This shit is broke
+		enabled = false
 	}
-}
-
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+	
+	processResources {
+		inputs.property "version", project.version
+		
+		filesMatching(["**/fabric.mod.json", "**/mods.toml"]) {
+			expand "version": project.version
+		}
+	}
+	
+	dependencies {
+		//This mf keeps disappearing on me
+		implementation "org.jetbrains:annotations:16.0.2"
+	}
+	
+	repositories {
+		maven {
+			name = "spunchbob"
+			url = "https://repo.spongepowered.org/repository/maven-public/"
+			content {
+				includeGroup "org.spongepowered"
+			}
+		}
 	}
 }
