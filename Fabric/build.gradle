@@ -25,10 +25,12 @@ dependencies {
 	
 	//trick out the local workspace a bit
 	modLocalRuntime fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
-	modLocalRuntime("de.siphalor:${project.amecs_artifactid}:${project.amecs_version}") {
-		exclude group: "com.github.astei"
-		exclude module: project.nmuk_artifactid //for testing amecs w/o nmuk
-	}
+	
+	//FABRIC NETWORKING API REFMAPS ARE FUCKING BROKEN OR WHATEVER, AMECS PULLS IN ALL OF FABRIC API, I DONT GIVE ENOUGH OF A SHIT TO DEBUG THIS
+//	modLocalRuntime("de.siphalor:${project.amecs_artifactid}:${project.amecs_version}") {
+//		exclude group: "com.github.astei"
+//		exclude module: project.nmuk_artifactid //for testing amecs w/o nmuk
+//	}
 	//modLocalRuntime("de.siphalor:${project.nmuk_artifactid}:${project.nmuk_version}") { exclude group: "com.github.astei"	} //for testing nmuk w/o amecs
 }
 
