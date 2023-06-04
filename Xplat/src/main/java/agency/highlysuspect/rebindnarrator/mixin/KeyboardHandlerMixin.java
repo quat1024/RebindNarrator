@@ -24,6 +24,8 @@ public class KeyboardHandlerMixin {
 		else return RebindNarrator.IMPL.isCorrectKey(key) ? key : notKey;
 	}
 	
+	//N.B. There are two instances of hasControlDown. One seems to only guard an empty `if` block (decompiler?)
+	//relating to the screenshot key. The other is for narrator-key purposes.
 	@Redirect(method = "keyPress", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;hasControlDown()Z"))
 	private boolean rebindnarrator$keyPress$redirHasControlDown() {
 		return RebindNarrator.IMPL.correctModifiersPressed();

@@ -13,14 +13,12 @@ public class ForgeImpl extends RebindNarrator {
 		"options.narrator",
 		KeyConflictContext.UNIVERSAL,
 		KeyModifier.CONTROL,
-		InputConstants.getKey("key.keyboard.b"), //forge :waa:
+		InputConstants.getKey("key.keyboard.b"),
 		"key.categories.misc"
 	);
 	
 	public ForgeImpl() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((RegisterKeyMappingsEvent e) -> {
-			e.register(NARRATOR_KEY);
-		});
+		FMLJavaModLoadingContext.get().getModEventBus().addListener((RegisterKeyMappingsEvent e) -> e.register(NARRATOR_KEY));
 	}
 	
 	@Override

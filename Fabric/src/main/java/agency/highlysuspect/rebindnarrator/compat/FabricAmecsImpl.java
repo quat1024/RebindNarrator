@@ -37,9 +37,8 @@ public class FabricAmecsImpl extends RebindNarrator {
 	@Override
 	public boolean correctModifiersPressed() {
 		//Just kidding, modifiers are actually checked in isCorrectKey, above. 
-		//It is done like this because:
-		//- AMECS users can set different sets of modifiers for each alternative keybind, so I need to check them at the same time I check their main key 
-		//- redirecting Screen.hasControlDown to return an unconditional `true` makes me feel a bit icky, I'd rather not do it if I'm not doing AMECS compat
+		//It is done like this because AMECS+NMUK users can set different sets of modifiers for each alternative bind,
+		//so I need to check them at the same time I check their main key.
 		return true;
 	}
 }

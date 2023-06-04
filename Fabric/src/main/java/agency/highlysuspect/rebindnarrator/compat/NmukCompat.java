@@ -14,7 +14,7 @@ import java.util.List;
 public class NmukCompat extends NmukShim {
 	@Override
 	public List<KeyMapping> getSelfAndAlternatives(KeyMapping self) {
-		ArrayList<KeyMapping> real = new ArrayList<>();
+		ArrayList<KeyMapping> real = new ArrayList<>(2);
 		real.add(self);
 		
 		List<KeyMapping> alternates = NMUKAlternatives.getAlternatives(self);

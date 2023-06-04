@@ -1,17 +1,17 @@
 buildscript {
 	repositories {
-		maven { url = 'https://maven.minecraftforge.net' }
-		maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
 		mavenCentral()
+		maven { url = "https://maven.minecraftforge.net" }
+		maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
 	}
 	dependencies {
-		classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+		classpath "net.minecraftforge.gradle:ForgeGradle:5.1.71"
+		classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
 	}
 }
-apply plugin: 'java'
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
+apply plugin: "java"
+apply plugin: "net.minecraftforge.gradle"
+apply plugin: "org.spongepowered.mixin"
 
 archivesBaseName = "${project.mod_name}-forge-${project.minecraft_version}"
 
@@ -22,13 +22,13 @@ mixin {
 }
 
 minecraft {
-	mappings channel: 'official', version: project.minecraft_version
+	mappings channel: "official", version: project.minecraft_version
 	
 	runs {
 		client {
-			workingDirectory file('./run')
-			property 'forge.logging.console.level', 'debug'
-			property 'fml.earlyprogresswindow', 'false'
+			workingDirectory file("./run")
+			property "forge.logging.console.level", "debug"
+			property "fml.earlyprogresswindow", "false"
 			ideaModule "${rootProject.name}.${project.name}.main"
 			mods {
 				botania {
@@ -39,9 +39,9 @@ minecraft {
 		}
 		
 		server {
-			workingDirectory file('./run')
-			property 'forge.logging.console.level', 'debug'
-			property 'fml.earlyprogresswindow', 'false'
+			workingDirectory file("./run")
+			property "forge.logging.console.level", "debug"
+			property "fml.earlyprogresswindow", "false"
 			ideaModule "${rootProject.name}.${project.name}.main"
 			mods {
 				botania {

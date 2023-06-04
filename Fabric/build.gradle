@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
+	id "fabric-loom" version "1.1.10"
 }
 
 archivesBaseName = "${project.mod_name}-fabric-${project.minecraft_version}"
@@ -16,22 +16,23 @@ dependencies {
 	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
 	modImplementation fabricApi.module("fabric-key-binding-api-v1", project.fabric_api_version)
-	
-	//xplat
-	implementation project(":Xplat")
-	
-	//integration: AMECS API (see: https://github.com/Siphalor/nmuk/issues/9 for reasoning behind the excludes)
-	modCompileOnly("de.siphalor:${project.amecsapi_artifactid}:${project.amecsapi_version}") { exclude group: "com.github.astei" }
-	
-	//trick out the local workspace a bit
 	modLocalRuntime fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
 	
-	//FABRIC NETWORKING API REFMAPS ARE FUCKING BROKEN OR WHATEVER, AMECS PULLS IN ALL OF FABRIC API, I DONT GIVE ENOUGH OF A SHIT TO DEBUG THIS
-//	modLocalRuntime("de.siphalor:${project.amecs_artifactid}:${project.amecs_version}") {
-//		exclude group: "com.github.astei"
-//		exclude module: project.nmuk_artifactid //for testing amecs w/o nmuk
-//	}
-	//modLocalRuntime("de.siphalor:${project.nmuk_artifactid}:${project.nmuk_version}") { exclude group: "com.github.astei"	} //for testing nmuk w/o amecs
+	implementation project(":Xplat")
+	
+	//integrations
+	modCompileOnly("de.siphalor:${project.amecsapi_artifactid}:${project.amecsapi_version}") { transitive = false }
+	modCompileOnly("de.siphalor:${project.nmuk_artifactid}:${project.nmuk_version}") { transitive = false }
+	
+	//would you like them at runtime too? (re-setup IDE integrations after changing, or just use runClient task)
+	def amecsRuntime = true
+	def nmukRuntime = false
+	if(amecsRuntime) {
+		modLocalRuntime("de.siphalor:${project.amecsapi_artifactid}:${project.amecsapi_version}") { transitive = false }
+		modLocalRuntime("de.siphalor:${project.amecs_artifactid}:${project.amecs_version}") { transitive = false }
+	}
+	if(nmukRuntime) modLocalRuntime("de.siphalor:${project.nmuk_artifactid}:${project.nmuk_version}") { transitive = false }
+	if(amecsRuntime || nmukRuntime) modLocalRuntime "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 }
 
 //fold in xplat resources and sources
