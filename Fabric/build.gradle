@@ -26,7 +26,7 @@ dependencies {
 	
 	//would you like them at runtime too? (re-setup IDE integrations after changing, or just use runClient task)
 	def amecsRuntime = true
-	def nmukRuntime = false
+	def nmukRuntime = true
 	if(amecsRuntime) {
 		modLocalRuntime("de.siphalor:${project.amecsapi_artifactid}:${project.amecsapi_version}") { transitive = false }
 		modLocalRuntime("de.siphalor:${project.amecs_artifactid}:${project.amecs_version}") { transitive = false }
