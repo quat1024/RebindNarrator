@@ -1,6 +1,6 @@
 # Rebind Narrator
 
-Adds an option to the controls screen under "misc" to rebind the narrator key. That's all it does. ~~Fabric~~ Fabric and Forge ~~1.16.1~~ ~~1.17.0~~ ~~1.18.2~~ ~~1.19.2~~ ~~1.19.4~~ 1.20.
+Adds an option to the controls screen under "misc" to rebind the narrator key. That's all it does. ~~Fabric~~ Fabric and Forge ~~1.16.1~~ ~~1.17.0~~ ~~1.18.2~~ ~~1.19.2~~ ~~1.19.4~~ ~~1.20~~ 1.20.1.
 
 ## Fabric version
 
