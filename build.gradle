@@ -1,11 +1,14 @@
 subprojects {
 	apply plugin: "java"
-	java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+	java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 	java.withSourcesJar()
+	
 	
 	tasks.withType(JavaCompile).configureEach {
 		it.options.encoding = "UTF-8"
-		it.options.release = 17
+		//it.options.release = 17
+		sourceCompatibility = 8
+		targetCompatibility=8
 	}
 	
 	tasks.withType(GenerateModuleMetadata) {
