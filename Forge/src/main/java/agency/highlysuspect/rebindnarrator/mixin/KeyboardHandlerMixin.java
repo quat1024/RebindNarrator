@@ -1,7 +1,7 @@
 package agency.highlysuspect.rebindnarrator.mixin;
 
 import agency.highlysuspect.rebindnarrator.RebindNarrator;
-import net.minecraft.client.KeyboardHandler;
+import net.minecraft.client.KeyboardListener;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(KeyboardHandler.class)
+@Mixin(KeyboardListener.class)
 public class KeyboardHandlerMixin {
 	//keyB -> the original constant targeted by ModifyConstant (66, GLFW_KEY_B)
 	//window, key, scancode, action, mods -> original method parameters, from GLFWKeyCallbackI.
@@ -26,7 +26,7 @@ public class KeyboardHandlerMixin {
 	
 	//N.B. There are two instances of hasControlDown. One seems to only guard an empty `if` block (decompiler?)
 	//relating to the screenshot key. The other is for narrator-key purposes.
-	@Redirect(method = "keyPress", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;hasControlDown()Z"))
+	@Redirect(method = "keyPress", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;hasControlDown()Z"))
 	private boolean rebindnarrator$keyPress$redirHasControlDown() {
 		return RebindNarrator.IMPL.correctModifiersPressed();
 	}

@@ -33,7 +33,7 @@ minecraft {
 			mods {
 				botania {
 					source sourceSets.main
-					source project(":Xplat").sourceSets.main
+					//source project(":Xplat").sourceSets.main
 				}
 			}
 		}
@@ -46,7 +46,7 @@ minecraft {
 			mods {
 				botania {
 					source sourceSets.main
-					source project(":Xplat").sourceSets.main
+					//source project(":Xplat").sourceSets.main
 				}
 			}
 		}
@@ -58,14 +58,14 @@ dependencies {
 	//i imagine mixingradle does this but idk
 	annotationProcessor "org.spongepowered:mixin:0.8.4-SNAPSHOT:processor"
 	
-	compileOnly project(":Xplat")
+	//compileOnly project(":Xplat")
 }
 
 //fold in xplat resources and sources
 processResources {
-	from project(":Xplat").sourceSets.main.resources
+	//from project(":Xplat").sourceSets.main.resources
 }
 
 tasks.withType(JavaCompile) {
-	source(project(":Xplat").sourceSets.main.allSource)
+	//source(project(":Xplat").sourceSets.main.allSource)
 }

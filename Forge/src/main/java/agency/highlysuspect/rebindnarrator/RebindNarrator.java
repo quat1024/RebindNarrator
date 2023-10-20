@@ -1,6 +1,6 @@
 package agency.highlysuspect.rebindnarrator;
 
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screen.Screen;
 import org.lwjgl.glfw.GLFW;
 
 public class RebindNarrator {
