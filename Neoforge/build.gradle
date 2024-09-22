@@ -1,0 +1,41 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		maven { url = "https://maven.neoforged.net/releases" }
+		
+		//this maven is still needed for "gradle.plugin.org.jetbrains.gradle.plugin.idea-ext:gradle-idea-ext:1.1.6"?
+		maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
+	}
+	dependencies {
+		classpath "net.neoforged.gradle:userdev:7.0.163"
+	}
+}
+apply plugin: "java"
+apply plugin: "net.neoforged.gradle.userdev"
+
+archivesBaseName = "${project.mod_name}-neoforge-${project.minecraft_version}"
+
+//mixin {
+//	add sourceSets.main, "${project.mod_name}.refmap.json"
+//
+//	config "${project.mod_name}.mixins.json"
+//}
+
+dependencies {
+	implementation "net.neoforged:forge:${neoforge_version}"
+	compileOnly project(":Xplat")
+}
+
+runs.configureEach {
+	workingDirectory file("./run")
+	modSources project.sourceSets.main, project(":Xplat").sourceSets.main
+}
+
+//fold in xplat resources and sources
+processResources {
+	from project(":Xplat").sourceSets.main.resources
+}
+
+tasks.withType(JavaCompile) {
+	source(project(":Xplat").sourceSets.main.allSource)
+}
