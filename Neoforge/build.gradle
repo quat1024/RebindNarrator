@@ -22,16 +22,15 @@ archivesBaseName = "${project.mod_name}-neoforge-${project.minecraft_version}"
 //}
 
 dependencies {
-	implementation "net.neoforged:forge:${neoforge_version}"
+	implementation "net.neoforged:neoforge:${neoforge_version}"
 	compileOnly project(":Xplat")
 }
 
 runs.configureEach {
 	workingDirectory file("./run")
-	modSources project.sourceSets.main, project(":Xplat").sourceSets.main
+	modSource project.sourceSets.main
 }
 
-//fold in xplat resources and sources
 processResources {
 	from project(":Xplat").sourceSets.main.resources
 }

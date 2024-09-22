@@ -21,7 +21,7 @@ plugins {
 rootProject.name = "rebind_narrator"
 include(
 //	"Fabric",
-//	"Neoforge",
+	"Neoforge",
 	"Xplat"
 )
 

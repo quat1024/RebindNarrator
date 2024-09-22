@@ -2,10 +2,10 @@ package agency.highlysuspect.rebindnarrator;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.settings.KeyConflictContext;
-import net.minecraftforge.client.settings.KeyModifier;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.settings.KeyConflictContext;
+import net.neoforged.neoforge.client.settings.KeyModifier;
 
 public class ForgeImpl extends RebindNarrator {
 	@SuppressWarnings("NoTranslation") //mcdev reporting that "key.keyboard.b" has no translation. thanks i guess
@@ -17,13 +17,17 @@ public class ForgeImpl extends RebindNarrator {
 		"key.categories.misc"
 	);
 	
-	public ForgeImpl() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((RegisterKeyMappingsEvent e) -> e.register(NARRATOR_KEY));
+	public ForgeImpl(IEventBus modBus) {
+		modBus.addListener(this::onRegisterKeyMappings);
+	}
+	
+	private void onRegisterKeyMappings(RegisterKeyMappingsEvent e) {
+		e.register(NARRATOR_KEY);
 	}
 	
 	@Override
 	public boolean isCorrectKey(int glfwKeyToken) {
-		return glfwKeyToken == NARRATOR_KEY.getKey().getValue(); //getKey is a Forge extension
+		return glfwKeyToken == NARRATOR_KEY.getKey().getValue(); //getKey is a Neoforge extension
 	}
 	
 	@Override

@@ -1,13 +1,16 @@
 modLoader = "javafml"
-loaderVersion = "[45,)"
+loaderVersion = "[1,)"
 license = "LGPL-3.0-or-later"
 issueTrackerURL = "https://github.com/quat1024/RebindNarrator/issues"
 logoFile = "rebindnarratoricon.png"
 
 [[mods]]
 modId = "rebind_narrator"
-version = "${version}"
+version = "2.0.3"
 displayName = "Rebind Narrator"
 description = "Adds a keybind to options for the narrator."
 authors = "quaternary"
 credits = "Your mom"
+
+[[mixins]]
+config = "rebind_narrator.mixins.json"
