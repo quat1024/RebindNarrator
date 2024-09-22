@@ -20,6 +20,8 @@ dependencies {
 	
 	implementation project(":Xplat")
 	
+	/*
+	
 	//integrations
 	modCompileOnly("de.siphalor:${project.amecsapi_artifactid}:${project.amecsapi_version}") { transitive = false }
 	modCompileOnly("de.siphalor:${project.nmuk_artifactid}:${project.nmuk_version}") { transitive = false }
@@ -33,6 +35,8 @@ dependencies {
 	}
 	if(nmukRuntime) modLocalRuntime("de.siphalor:${project.nmuk_artifactid}:${project.nmuk_version}") { transitive = false }
 	if(amecsRuntime || nmukRuntime) modLocalRuntime "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	
+	*/
 }
 
 //fold in xplat resources and sources
