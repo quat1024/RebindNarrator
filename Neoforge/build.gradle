@@ -7,7 +7,7 @@ buildscript {
 		maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
 	}
 	dependencies {
-		classpath "net.neoforged.gradle:userdev:7.0.163"
+		classpath "net.neoforged.gradle:userdev:7.0.180"
 	}
 }
 apply plugin: "java"
